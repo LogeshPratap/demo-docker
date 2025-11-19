@@ -23,12 +23,12 @@ jobs:
       # Build image
       - name: Build Docker image
         run: |
-          docker build -t sndass/cicd-demo:latest .
+          docker build -t logeshpratap/cicd-demo:latest .
 
       # Push image
       - name: Push Docker image
         run: |
-          docker push sndass/cicd-demo:latest
+          docker push logeshpratap/cicd-demo:latest
 
       # Echo deployment instructions
       - name: Deployment notes
