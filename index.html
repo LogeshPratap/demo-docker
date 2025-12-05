@@ -1,160 +1,148 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Logesh Pratap — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0f1724; --card:#0b1220; --accent:#06b6d4; --muted:#94a3b8; --glass: rgba(255,255,255,0.03);
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Challenge</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #0b0f19;
+        font-family: "Segoe UI", sans-serif;
+        color: #e9eefc;
+        overflow: hidden;
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:linear-gradient(180deg,#071029 0%,var(--bg) 100%);color:#e6eef6;line-height:1.5}
-    .container{max-width:1000px;margin:36px auto;padding:24px}
-    header{display:flex;gap:20px;align-items:center}
-    .avatar{width:110px;height:110px;border-radius:18px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:36px;color:#071022;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
-    h1{margin:0;font-size:28px}
-    p.lead{color:var(--muted);margin:6px 0 0}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:22px}
-    .card{background:var(--card);padding:18px;border-radius:14px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
-    .muted{color:var(--muted);font-size:14px}
-    .skill-badge{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);margin:6px 6px 6px 0;font-size:13px}
-    ul.clean{padding-left:18px;margin:8px 0}
-    .projects .proj{border-left:3px solid rgba(255,255,255,0.04);padding:10px 12px;margin-bottom:12px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
-    .contact-list a{color:var(--accent);text-decoration:none}
-    footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#8b5cf6);color:#021223;text-decoration:none;font-weight:600}
-    @media (max-width:880px){.grid{grid-template-columns:1fr;}.avatar{width:88px;height:88px;font-size:28px}}
-  </style>
+
+    /* Animated glowing background gradients */
+    .bg-glow {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.35;
+        animation: drift 18s infinite alternate ease-in-out;
+        z-index: -10;
+    }
+
+    .blue { background: #3a7bd5; top: -10%; left: -10%; }
+    .teal { background: #2bd9d9; top: 40%; left: 70%; animation-duration: 22s; }
+    .green { background: #15ff99; top: 70%; left: 20%; animation-duration: 26s; }
+    .orange { background: #ff8f3c; top: 10%; left: 60%; animation-duration: 20s; }
+
+    @keyframes drift {
+        from { transform: translateY(0px) translateX(0px); }
+        to { transform: translateY(80px) translateX(40px); }
+    }
+
+    /* Kubernetes hexagon icons floating */
+    .kube-hex {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        background: rgba(0,140,255,0.15);
+        border: 2px solid rgba(0,150,255,0.35);
+        clip-path: polygon(25% 5%, 75% 5%, 95% 50%, 75% 95%, 25% 95%, 5% 50%);
+        animation: floatHex 12s infinite ease-in-out;
+        filter: blur(1px);
+    }
+
+    @keyframes floatHex {
+        0% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+        50% { transform: translateY(-40px) rotate(20deg); opacity: 0.8; }
+        100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+    }
+
+    .hex1 { top: 20%; left: 10%; }
+    .hex2 { top: 60%; left: 80%; animation-delay: -2s; }
+    .hex3 { top: 75%; left: 35%; animation-delay: -4s; }
+
+    /* Title */
+    #title {
+        text-align: center;
+        font-size: 3.2rem;
+        font-weight: 800;
+        margin-top: 60px;
+        letter-spacing: 4px;
+        background: linear-gradient(to right, #00d2ff, #3a7bd5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+    }
+
+    /* Container for statements */
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 80px;
+    }
+
+    .card {
+        width: 40%;
+        background: rgba(255,255,255,0.04);
+        padding: 35px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 0 40px rgba(0,150,255,0.25);
+        transition: 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 50px rgba(0,200,255,0.5);
+    }
+
+    .label {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #00c3ff;
+        margin-bottom: 12px;
+    }
+
+    .text {
+        font-size: 1.4rem;
+        opacity: 0.9;
+    }
+</style>
+
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="avatar">LP</div>
-      <div>
-        <h1>Logesh Pratap</h1>
-        <p class="lead">Junior Software Engineer (Cyber Security) — B.Tech (CSE) • Salem, Tamil Nadu</p>
-        <p class="muted">Focused on penetration testing, secure web development, and applied cryptography.</p>
-      </div>
-      <div style="margin-left:auto;text-align:right">
-        <div class="muted">Contact</div>
-        <div style="margin-top:6px;font-weight:600">+91-9843978931</div>
-        <div style="font-size:14px;color:var(--muted)"><a class="contact-list" href="mailto:logeshpratapmurugan@gmail.com">logeshpratapmurugan@gmail.com</a></div>
-      </div>
-    </header>
 
-    <div class="grid">
-      <main>
-        <section class="card">
-          <h2 style="margin-top:0">About</h2>
-          <p class="muted">I am a recent B.Tech graduate in Computer Science and Engineering from SASTRA Deemed University (graduated: September 2024). I build secure applications, perform penetration tests, and work on cryptography and ML-backed projects. I enjoy breaking systems to make them safer and automating repetitive security tasks.</p>
-          <p class="muted" style="margin-top:8px"><strong>Education:</strong> B.Tech — Computer Science & Engineering, SASTRA Deemed University (Graduated 09/2024). CGPA: 6.7273</p>
-        </section>
+<!-- Glowing animated background blobs -->
+<div class="bg-glow blue"></div>
+<div class="bg-glow teal"></div>
+<div class="bg-glow green"></div>
+<div class="bg-glow orange"></div>
 
-        <section class="card" style="margin-top:14px">
-          <h2>Skills</h2>
-          <div style="margin:8px 0">
-            <span class="skill-badge">C</span>
-            <span class="skill-badge">C++</span>
-            <span class="skill-badge">Java</span>
-            <span class="skill-badge">Python</span>
-            <span class="skill-badge">SQL</span>
-            <span class="skill-badge">HTML</span>
-            <span class="skill-badge">CSS</span>
-          </div>
-          <div style="margin-top:10px">
-            <strong class="muted">Tools & Concepts:</strong>
-            <div class="muted" style="margin-top:6px">Cisco Packet Tracer, Wireshark, GDB, AWS services, SDLC, STLC, debugging, cryptographic algorithms, threat modeling, penetration testing</div>
-          </div>
-        </section>
+<!-- Floating Kubernetes hexagons -->
+<div class="kube-hex hex1"></div>
+<div class="kube-hex hex2"></div>
+<div class="kube-hex hex3"></div>
 
-        <section class="card projects" style="margin-top:14px">
-          <h2>Selected Projects</h2>
+<!-- Title -->
+<div id="title">DevOps Challenge</div>
 
-          <div class="proj">
-            <h3 style="margin:0">Hybrid Cryptography System</h3>
-            <div class="muted">A hybrid cryptosystem using RSA for key exchange and symmetric encryption for bulk data protection — designed for secure data-at-rest and transit.</div>
-          </div>
-
-          <div class="proj">
-            <h3 style="margin:0">Mental Disorder Diagnosis Web App</h3>
-            <div class="muted">A diagnostic web application combining SVM and CNN models with PSA (probabilistic scoring/analysis) to assist early detection of certain mental disorders.</div>
-          </div>
-
-          <div class="proj">
-            <h3 style="margin:0">Fault-Tolerant Routing Mechanism</h3>
-            <div class="muted">A routing mechanism using multiple routers to enable fast data recovery and reduce downtime in case of node failures.</div>
-          </div>
-
-          <div class="proj">
-            <h3 style="margin:0">Web Application Security Suite</h3>
-            <div class="muted">Hands-on security projects covering command injection, CSRF, insecure file upload, SQL injection, and XSS — including proof-of-concept code and remediation plans.</div>
-          </div>
-
-        </section>
-
-        <section class="card" style="margin-top:14px">
-          <h2>Experience & Assignments</h2>
-          <ul class="clean muted">
-            <li>Received a first-round penetration testing assignment from Resec Systems (Pentester & Red Team Specialist) — task: identify security flags on an online lab environment.</li>
-            <li>Preparing for technical interviews for roles including Junior Software Engineer (Cyber Security) at NAVAT Technologies and other software developer roles.</li>
-          </ul>
-        </section>
-
-        <section class="card" style="margin-top:14px">
-          <h2>Certifications</h2>
-          <ul class="clean muted">
-            <li>NASSCOM Digital Journey</li>
-            <li>Network Mastery for Ethical Hackers</li>
-            <li>Web Hacking for Beginners</li>
-            <li>Certified CSEH + CEH</li>
-          </ul>
-        </section>
-
-      </main>
-
-      <aside>
-        <div class="card">
-          <h3 style="margin-top:0">Profile</h3>
-          <div class="muted">Name: <strong>Logesh Pratap</strong></div>
-          <div class="muted">Location: <strong>Salem, Tamil Nadu</strong></div>
-          <div class="muted">Graduation: <strong>09/2024</strong></div>
-          <div class="muted">CGPA: <strong>6.7273</strong></div>
-
-          <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:12px 0;border-radius:2px">
-
-          <h3>Contact</h3>
-          <div class="muted">Phone: <a href="tel:+919843978931" class="muted">+91-9843978931</a></div>
-          <div class="muted">Email: <a href="mailto:logeshpratapmurugan@gmail.com" class="muted">logeshpratapmurugan@gmail.com</a></div>
-
-          <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:12px 0;border-radius:2px">
-
-          <h3>Close Contacts</h3>
-          <div class="muted">Yamuna • Balann • Anish</div>
-
-          <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:12px 0;border-radius:2px">
-
-          <h3>Quick Links</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <a class="btn" href="#projects">Projects</a>
-            <a class="btn" href="mailto:logeshpratapmurugan@gmail.com">Email me</a>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <h3 style="margin-top:0">Interests</h3>
-          <div class="muted">Penetration testing, secure web development, cryptography, machine learning for security, network resilience.</div>
-        </div>
-
-      </aside>
+<!-- Two statement cards -->
+<div class="wrapper">
+    <div class="card">
+        <div class="label">Statement A</div>
+        <div class="text" id="statementA">A. The on: keyword defines workflow triggers. </div>
     </div>
 
-    <footer>
-      <div>© <strong>Logesh Pratap</strong> — Built with care • Last updated: November 20, 2025</div>
-    </footer>
-  </div>
+    <div class="card">
+        <div class="label">Statement B</div>
+        <div class="text" id="statementB">B. The on: keyword is used to define environment variables.
+</div>
+    </div>
+</div>
+
 </body>
 </html>
+
+
+
+ <!-- B. The on: keyword is used to define environment variables.
+A. The on: keyword defines workflow triggers.  -->
